@@ -1,39 +1,32 @@
-#include <stdio.h>
+#include "lists.h"
 #include <stdlib.h>
 
 /**
- * struct listint_s - singly linked list
- * @n: integer
- * @next: points to the next node
+ * add_nodeint_recursive - helper function for recursive insertion
+ * @head: pointer to the current node in the list
+ * @n: data to insert in the new node
  *
- * Description: singly linked list node structure
+ * Return: pointer to the new node, or NULL if it fails
  */
-typedef struct listint_s
+listint_t *add_nodeint_recursive(listint_t *head, const int n)
 {
-    int n;
-    struct listint_s *next;
-} listint_t;
-
-/**
- * add_nodeint - Adds a new node at the beginning of a listint_t list.
- * @head: Pointer to a pointer to the head node of the list.
- * @n: Integer data for the new node.
- *
- * Return: The address of the new element (new node), or NULL if it failed.
- */
-listint_t *add_nodeint(listint_t **head, const int n)
-{
-    listint_t *new_node = (listint_t *)malloc(sizeof(listint_t));
-    if (new_node == NULL)
+    if (head == NULL)
     {
-        /* Failed to allocate memory for the new node */
-        return NULL;
+        listint_t *new = malloc(sizeof(listint_t));
+        if (!new)
+            return NULL;
+
+        new->n = n;
+        new->next = NULL;
+        return new;
     }
 
-    new_node->n = n;
-    new_node->next = *head;
-    *head = new_node;
-
-    return new_node;
+    head->next = add_nodeint_recursive(head->next, n);
+    return head;
 }
 
+listint_t *add_nodeint(listint_t **head, const int n)
+{
+    *head = add_nodeint_recursive(*head, n);
+    return *head;
+}
