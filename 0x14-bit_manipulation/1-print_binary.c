@@ -1,13 +1,8 @@
 #include "main.h"
-
 /**
-* Print_binary - Prints the binary equivalent of a decimal number
-* @n: number to print in binary
-*
-* Description: This function takes an unsigned long integer 'n' and prints its
-* binary representation to the standard output.
-* It uses the _putchar function to print characters.
-*/
+ * print_binary - prints the binary representation of a number
+ * @n: the number to print in binary
+ */
 void print_binary(unsigned long int n)
 {
 int j, leading_ones = 0;
@@ -26,3 +21,4 @@ _putchar('0');
 if (!leading_ones)
 _putchar('0');
 }
+
