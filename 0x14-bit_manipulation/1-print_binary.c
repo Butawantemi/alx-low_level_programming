@@ -22,4 +22,3 @@ _putchar('0');
 if (!leading_ones)
 _putchar('0');
 }
-
